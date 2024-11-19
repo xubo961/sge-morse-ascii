@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Hashtable<String, String > morseCastellano = new Hashtable<>();
+        HashMap<String, String > morseCastellano = new HashMap<>();
 
         morseCastellano.put("a", "._");
         morseCastellano.put("b", "_...");
@@ -46,7 +46,14 @@ public class Main {
         morseCastellano.put("9", "____.");
 
         System.out.println("Introduce un código morse para traducir: ");
-        scanner.nextLine();
+        String respuesta = scanner.nextLine();
+        System.out.println(morseCastellano.get(respuesta));
+
+
+
+        morseCastellano.forEach((l, m) -> {
+            System.out.println("La traducción de " + m + " es " + l);
+        });
 
     }
 }
