@@ -1,12 +1,12 @@
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        HashMap<String, String > morseCastellano = new HashMap<>();
-
+        
+        // Crear el mapa con las letras y su código Morse
+        HashMap<String, String> morseCastellano = new HashMap<>();
         morseCastellano.put("a", "._");
         morseCastellano.put("b", "_...");
         morseCastellano.put("c", "_._.");
@@ -44,16 +44,46 @@ public class Main {
         morseCastellano.put("7", "__...");
         morseCastellano.put("8", "___..");
         morseCastellano.put("9", "____.");
+        
+        while (true) {
+            System.out.println("Introduce un código morse para traducir o escribe 'salir' para terminar:");
+            String respuesta = scanner.nextLine();
+            
+            if (respuesta.equalsIgnoreCase("salir")) {
+                break;
+            }
 
-        System.out.println("Introduce un código morse para traducir: ");
-        String respuesta = scanner.nextLine();
-        System.out.println(morseCastellano.get(respuesta));
+            String[] codigoMorse = respuesta.split(" / ");
+            String traduccion = "";
+            
+            for (String palabra : codigoMorse) {
+                String[] characters = palabra.split(" ");
+                for (String character : characters) {
+                    String letra = obtenerLetraDeMorse(morseCastellano, character);
+                    if (letra != null) {
+                        traduccion = letra;
+                    } else {
+                        traduccion = "Escribe un  código morse válido";  
+                    }
+                }
+            }
 
+            System.out.println("Traducción: " + traduccion);
+        }
 
+        // Cerrar el scanner
+        scanner.close();
+        System.out.println("Programa terminado.");
+    }
 
-        morseCastellano.forEach((l, m) -> {
-            System.out.println("La traducción de " + m + " es " + l);
-        });
-
+    // Método para obtener la letra de Morse
+    private static String obtenerLetraDeMorse(HashMap<String, String> morseMap, String morseCode) {
+        // Recorremos el mapa y comparamos el código Morse
+        for (String letra : morseMap.keySet()) {
+            if (morseMap.get(letra).equals(morseCode)) {
+                return letra;
+            }
+        }
+        return null;  // Si no encontramos el código Morse, devolver null
     }
 }
