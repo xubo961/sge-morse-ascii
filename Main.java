@@ -49,9 +49,7 @@ public class Main {
         String respuesta = scanner.nextLine();
         System.out.println(morseCastellano.get(respuesta));
 
-        while (true) {
-            if
-        }
+
 
         morseCastellano.forEach((l, m) -> {
             System.out.println("La traducción de " + m + " es " + l);
